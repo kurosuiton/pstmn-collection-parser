@@ -1,0 +1,1042 @@
+{
+	"info": {
+		"_postman_id": "8660bf55-9dfe-e13c-a1f6-23ea70bf4fa0",
+		"name": "Access control",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Unique name role instance",
+			"description": "",
+			"item": [
+				{
+					"name": "Create new actor for Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"active\": true,\r\n  \"bank\": false,\r\n  \"blockType\": \"NONE\",\r\n  \"clientId\": 10,\r\n  \"id\": null,\r\n  \"userId\": \"c3ac91a4-1ad2-469e-8ccc-e18a731fcd5f\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control-platform}}/ui/admin/clients/10/users/c3ac91a4-1ad2-469e-8ccc-e18a731fcd5f/actors",
+							"host": [
+								"{{access-control-platform}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"10",
+								"users",
+								"c3ac91a4-1ad2-469e-8ccc-e18a731fcd5f",
+								"actors"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Create role instanse with permisson First",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clientId\": 10,\r\n  \"id\": null,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"VTBclient1\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n    {\r\n      \"businessMethod\": {\r\n        \"businessObjectId\": 12,\r\n        \"id\": 25\r\n      },\r\n      \"expressionId\": null,\r\n      \"id\": 0,\r\n      \"isDefault\": true,\r\n      \"roleId\": null\r\n    }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"templateId\": 1,\r\n  \"templateName\": \"template1\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/clients/10/users/VTBclient1/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"10",
+								"users",
+								"VTBclient1",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Create role instanse with permisson Second",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clientId\": 0,\r\n  \"id\": 0,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"string\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n    {\r\n      \"businessMethod\": {\r\n        \"businessObjectId\": 0,\r\n        \"id\": 0\r\n      },\r\n      \"expressionId\": 0,\r\n      \"id\": 0,\r\n      \"isDefault\": true,\r\n      \"roleId\": 0\r\n    }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"templateId\": 0,\r\n  \"templateName\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control-platform}}/ui/admin/clients/{clientId}/users/{userId}/permissions",
+							"host": [
+								"{{access-control-platform}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"{clientId}",
+								"users",
+								"{userId}",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Create new actor for Bank",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"active\": true,\r\n  \"bank\": false,\r\n  \"blockType\": \"NONE\",\r\n  \"clientId\": 5,\r\n  \"id\": null,\r\n  \"userId\": \"8aa78b9c-7eab-4673-a19a-a553539e4f4b\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/clients/5/users/8aa78b9c-7eab-4673-a19a-a553539e4f4b/actors",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"5",
+								"users",
+								"8aa78b9c-7eab-4673-a19a-a553539e4f4b",
+								"actors"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Create role instanse with permisson Bank First",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"VTBbankRole\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n    {\r\n      \"businessMethod\": {\r\n        \"businessObjectId\": 12,\r\n        \"id\": 25\r\n      },\r\n      \"expressionId\": null,\r\n      \"id\": null,\r\n      \"isDefault\": true,\r\n      \"roleId\": null\r\n    }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"signature\": \"string\",\r\n  \"templateId\": 3,\r\n  \"templateName\": \"Template3\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/branches/2/users/VTBbank/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"branches",
+								"2",
+								"users",
+								"VTBbank",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Create role instanse with permisson Bank Second",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": null,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"VTBbankRole\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n    {\r\n      \"businessMethod\": {\r\n        \"businessObjectId\": 12,\r\n        \"id\": 25\r\n      },\r\n      \"expressionId\": null,\r\n      \"id\": null,\r\n      \"isDefault\": true,\r\n      \"roleId\": null\r\n    }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"signature\": \"string\",\r\n  \"templateId\": 3,\r\n  \"templateName\": \"Template3\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/branches/2/users/VTBbank/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"branches",
+								"2",
+								"users",
+								"VTBbank",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Data replication collection ac",
+			"description": "",
+			"item": [
+				{
+					"name": "Create new actor for Client",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "29a426d5-2d62-4977-ac0e-ec93ed937917",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable('actor_id', jsonData.id);",
+									""
+								]
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "4380f19f-a8f8-463e-83ed-c2cbc52b9c4d",
+								"type": "text/javascript",
+								"exec": [
+									"var reqJson = JSON.parse(request.data);",
+									"postman.setGlobalVariable('client_id', reqJson.clientId);",
+									"postman.setGlobalVariable('user_id', reqJson.userId);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n  \"active\": true,\r\n  \"bank\": false,\r\n  \"blockType\": \"NONE\",\r\n  \"clientId\": 4,\r\n  \"id\": null,\r\n  \"userId\": \"8aa78b9c-7eab-4673-a19a-a553539e4f4b\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/clients/{{client_id}}/users/{{user_id}}/actors",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"{{client_id}}",
+								"users",
+								"{{user_id}}",
+								"actors"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Update actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": 4,\n        \"clientId\": 4,\n        \"userId\": \"8aa78b9c-7eab-4673-a19a-a553539e4f4b\",\n        \"bank\": false,\n        \"blockType\": \"NONE\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/actors/{{actor_id}}",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"actors",
+								"{{actor_id}}"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Get all actors by UserId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/users/{{user_id}}/actors",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"users",
+								"{{user_id}}",
+								"actors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create employees",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiIxZTkxMmI3Yy1iMzhjLTQwOWEtYjE4Mi1lYWI4NDEyNTVhM2MiLCJ1c2VyX25hbWUiOiJFa2F0ZXJpbmFfTWlhc25pa292YUBlcGFtLmNvbSIsInNjb3BlIjpbInZ0Yi1jbG50Il0sImNuIjoiRWthdGVyaW5hX01pYXNuaWtvdmEiLCJleHAiOjM2NzUyMzM4NjksInRva2VuX3R5cGUiOiJFTVBMT1lFRSIsIm1lc3NhZ2UiOiJlZDQ4MTMwMDNkNWQ4Y2MyYzU0YjFhMjhkYWU5MGYzN2E0ZDkxZmY3Yzc5YmM2ZTdiZThlOTU5MzVhNDc2NzNlMmYyODUxNjZhNzQ2MDdmYzY4YTQ3NGExODlmZDkyNzBkZmM0YTc3MTA5MTViOTM0OGE3ZGFkOTk5YTRlNTE4ZiIsImp0aSI6Ijg4OGE0OGVhLTkzY2QtNGU2YS1iMTc3LTNkM2E5MjAyYThkYiIsIm9yZ0lkIjpbIjEwIl0sImNsaWVudF9pZCI6InZ0YiNjbG50In0.M9_U2V-VB_piSN4MpCffrhD5qJPvR8Qv1phVCX69ATLMyQSh96iJvAjfROSoPVqPqBvj5EAZSbqixLeVwaISpZt8Vdq-3fe8pNUquvgPxnmQz0aHXOKjxbYFZg-rcvUBKkzW3QFyTI49xqGM0ew4FmmrqzwF6zLwH9yL3DvBTUzvk32wphmUBt0sSvH2dwB7jV-zAHzg5V_3KjNLlIGKQ4yzT2lPBrSgkVdTn4-FknY9ogHU68YGprAMP7PxBrtQba5tyODGzQC8vk5-BYnHie4p1HG_ao9eRqD-fesu6ZLYOC2N6PJ5Rl8KwwbSAPHQUjWjILaMlUZEq3TvtTQuTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"actor\": {\r\n    \"id\": {{actor_id}},\r\n    \"title\": {}\r\n  },\r\n  \"authorityPeriodEndDate\": \"2018-06-04T12:35:27.358Z\",\r\n  \"authorityPeriodStartDate\": \"2018-06-04T12:35:27.358Z\",\r\n  \"client\": {\r\n    \"id\":{{client_id}},\r\n    \"title\": {}\r\n  },\r\n  \"externalUser\": \"{{user_id}}\",\r\n  \"fullName\": \"string\",\r\n  \"id\": 0,\r\n  \"isBlocked\": true,\r\n  \"jobTitle\": \"string\",\r\n  \"version\": 0,\r\n  \"workEmail\": \"string\",\r\n  \"workPhone\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "{{client}}/admin/dictionaries/employees",
+							"host": [
+								"{{client}}"
+							],
+							"path": [
+								"admin",
+								"dictionaries",
+								"employees"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Get templates by type(client)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/templates/?type=CLIENT",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"templates",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "CLIENT"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get template with permissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/templates/4/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"templates",
+								"4",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create role instanse with permisson",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3640a14a-9f02-42bf-bd66-69da1c92658d",
+								"type": "text/javascript",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setGlobalVariable('roleInstanceID', jsonData.id);",
+									"",
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clientId\": {{client_id}},\r\n  \"id\": null,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"roleInstanceName\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n   \r\n        {\r\n            \"id\": 3,\r\n            \"roleId\": 2,\r\n            \"businessMethod\": {\r\n                \"id\": 1,\r\n                \"businessObjectId\": 1\r\n            }\r\n        },\r\n        {\r\n            \"id\": 4,\r\n            \"roleId\": 2,\r\n            \"businessMethod\": {\r\n                \"id\": 2,\r\n                \"businessObjectId\": 1\r\n            }\r\n        },\r\n        {\r\n            \"id\": 38,\r\n            \"roleId\": 2,\r\n            \"businessMethod\": {\r\n                \"id\": 83,\r\n                \"businessObjectId\": 7\r\n            }\r\n        },\r\n        {\r\n            \"id\": 39,\r\n            \"roleId\": 2,\r\n            \"businessMethod\": {\r\n                \"id\": 82,\r\n                \"businessObjectId\": 7\r\n            }\r\n        },\r\n         {\r\n            \"id\": 7,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 51,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 8,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 52,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 9,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 53,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 10,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 54,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 11,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 56,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 12,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 57,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 13,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 58,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 14,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 62,\r\n                \"businessObjectId\": 4\r\n            }\r\n        },\r\n        {\r\n            \"id\": 15,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 63,\r\n                \"businessObjectId\": 5\r\n            }\r\n        },\r\n        {\r\n            \"id\": 16,\r\n            \"roleId\": 4,\r\n            \"businessMethod\": {\r\n                \"id\": 67,\r\n                \"businessObjectId\": 5\r\n            }\r\n        }\r\n        \r\n  ],\r\n  \"revision\": \"string\",\r\n  \"templateId\": 2,\r\n  \"templateName\": \"Полные права на письма для клиента\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/clients/{{client_id}}/users/{{user_id}}/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"clients",
+								"{{client_id}}",
+								"users",
+								"{{user_id}}",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Get role instance with permissions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/roles/{{roleInstanceID}}/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"roles",
+								"{{roleInstanceID}}",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update role instance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": 488,\n    \"name\": \"LETTERS 583 4 8aa78b9c-7eab-4673-a19a-a553539e4f4b\",\n    \"templateId\": 515,\n    \"templateName\": \"Сотрудник клиента\",\n    \"clientId\": 4,\n    \"isUnbound\": false,\n    \"isDefault\": false,\n    \"signature\": \"CLIENT_ROLE\",\n    \"permissions\": [{\n            \"id\": null,\n            \"roleId\": 488,\n            \"businessMethod\": {\n                \"id\": 99,\n                \"businessObjectId\": 15\n            }\n        }\n    \t]\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/roles/{{roleInstanceID}}/permissions",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"roles",
+								"{{roleInstanceID}}",
+								"permissions"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete actor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has post data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data posted'] = (responseJSON.data && responseJSON.data.length === 256);",
+									"",
+									"tests[\"content-type equals text/plain\"] = responseJSON && responseJSON.headers && (responseJSON.headers[\"content-type\"] === 'text/plain');"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clientId\": 1,\r\n  \"id\": null,\r\n  \"isDefault\": true,\r\n  \"isUnbound\": true,\r\n  \"name\": \"bankPermission\",\r\n  \"ownerRoleId\": 0,\r\n  \"permissions\": [\r\n     {\r\n            \"id\": 19,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 6,\r\n                \"businessObjectId\": 1\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 20,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 2,\r\n                \"businessObjectId\": 1\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 21,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 7,\r\n                \"businessObjectId\": 1\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 22,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 9,\r\n                \"businessObjectId\": 2\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 23,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 10,\r\n                \"businessObjectId\": 2\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 24,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 11,\r\n                \"businessObjectId\": 2\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 25,\r\n            \"roleId\": 3,\r\n            \"businessMethod\": {\r\n                \"id\": 12,\r\n                \"businessObjectId\": 2\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n  {\r\n            \"id\": 37,\r\n            \"roleId\": 5,\r\n            \"businessMethod\": {\r\n                \"id\": 13,\r\n                \"businessObjectId\": 3\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 38,\r\n            \"roleId\": 5,\r\n            \"businessMethod\": {\r\n                \"id\": 14,\r\n                \"businessObjectId\": 3\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n {\r\n            \"id\": 41,\r\n            \"roleId\": 7,\r\n            \"businessMethod\": {\r\n                \"id\": 15,\r\n                \"businessObjectId\": 4\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        },\r\n        {\r\n            \"id\": 42,\r\n            \"roleId\": 7,\r\n            \"businessMethod\": {\r\n                \"id\": 16,\r\n                \"businessObjectId\": 4\r\n            },\r\n            \"expressionId\": null,\r\n            \"isDefault\": null\r\n        }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"signature\": \"string\",\r\n  \"templateId\": 3,\r\n  \"templateName\": \"Полные права на письма для банка\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/ui/admin/actors/{{actor_id}}",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"ui",
+								"admin",
+								"actors",
+								"{{actor_id}}"
+							]
+						},
+						"description": "The HTTP `POST` request method is meant to transfer data to a server \n(and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `POST` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following request,\n\n> POST /hi/there?hand=wave\n>\n> <request-body>\n\nThe parameter \"hand\" has the value \"wave\". The request body can be in multiple\nformats. These formats are defined by the MIME type of the request. The MIME \nType can be set using the ``Content-Type`` HTTP header. The most commonly used \nMIME types are:\n\n* `multipart/form-data`\n* `application/x-www-form-urlencoded`\n* `application/json`\n\nThis endpoint echoes the HTTP headers, request parameters, the contents of\nthe request body and the complete URI requested."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Хранение данных из прикладного микросервиса",
+			"description": "",
+			"item": [
+				{
+					"name": "PUT Business object",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"businessMethods\": [\r\n    {\r\n      \"arguments\": [\r\n        {\r\n          \"id\": 0,\r\n          \"name\": \"string\"\r\n        }\r\n      ],\r\n      \"businessObjectId\": 16,\r\n      \"id\": null,\r\n      \"name\": \"string\",\r\n      \"signature\": \"businessObjectForTests\"\r\n    }\r\n  ],\r\n  \"id\": null,\r\n  \"name\": \"bobjectTests\",\r\n  \"signature\": \"BOTests\",\r\n  \"sourceId\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/api/registration/object",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"api",
+								"registration",
+								"object"
+							]
+						},
+						"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Predicate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"custom\": true,\r\n  \"id\": null,\r\n  \"name\": \"testPredicate\",\r\n  \"predicateArgs\": [\r\n    {\r\n      \"id\":null,\r\n      \"name\": \"testPredicateArgs\"\r\n    }\r\n  ],\r\n  \"predicateParams\": [\r\n    {\r\n      \"id\": null,\r\n      \"name\": \"testpredicateParams\",\r\n      \"type\": \"string\"\r\n    }\r\n  ],\r\n  \"signature\": \"TestingPutPredicate\",\r\n  \"sourceId\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/api/registration/predicate",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"api",
+								"registration",
+								"predicate"
+							]
+						},
+						"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"custom\": true,\r\n  \"id\": null,\r\n  \"name\": \"testPredicate\",\r\n  \"predicateArgs\": [\r\n    {\r\n      \"id\":null,\r\n      \"name\": \"testPredicateArgs\"\r\n    }\r\n  ],\r\n  \"predicateParams\": [\r\n    {\r\n      \"id\": null,\r\n      \"name\": \"testpredicateParams\",\r\n      \"type\": \"string\"\r\n    }\r\n  ],\r\n  \"signature\": \"TestingPutPredicate\",\r\n  \"sourceId\": \"string\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/api/registration/predicate",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"api",
+								"registration",
+								"predicate"
+							]
+						},
+						"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n"
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Product Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var responseJSON;",
+									"",
+									"try { ",
+									"    responseJSON = JSON.parse(responseBody); ",
+									"    tests['response is valid JSON'] = true;",
+									"}",
+									"catch (e) { ",
+									"    responseJSON = {}; ",
+									"    tests['response is valid JSON'] = false;",
+									"}",
+									"",
+									"",
+									"tests['response has PUT data'] = _.has(responseJSON, 'data');",
+									"tests['response matches the data sent in request'] = (responseJSON.data && responseJSON.data.length === 256);"
+								]
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"group\": \"string\",\r\n  \"id\": null,\r\n  \"is_bank\": false,\r\n  \"is_unbound\": true,\r\n  \"name\": \"testTemplate\",\r\n  \"permissions\": [\r\n    {\r\n      \"businessMethod\": {\r\n        \"arguments\": [\r\n          {\r\n            \"id\": null,\r\n            \"name\": \"testBusMethArg\"\r\n          }\r\n        ],\r\n        \"businessObjectId\": null,\r\n        \"id\": null,\r\n        \"name\": \"testBusObject\",\r\n        \"signature\": \"busObjTest\"\r\n      },\r\n      \"expressionId\": null,\r\n      \"id\": null,\r\n      \"isDefault\": true,\r\n      \"roleId\": null\r\n    }\r\n  ],\r\n  \"revision\": \"string\",\r\n  \"signature\": \"testTemplateSign\"\r\n}"
+						},
+						"url": {
+							"raw": "{{access-control}}/api/registration/predicate",
+							"host": [
+								"{{access-control}}"
+							],
+							"path": [
+								"api",
+								"registration",
+								"predicate"
+							]
+						},
+						"description": "The HTTP `PUT` request method is similar to HTTP `POST`. It too is meant to \ntransfer data to a server (and elicit a response). What data is returned depends on the implementation\nof the server.\n\nA `PUT` request can pass parameters to the server using \"Query String \nParameters\", as well as the Request Body. For example, in the following \nraw HTTP request,\n\n> PUT /hi/there?hand=wave\n>\n> <request-body>\n\n\n"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
